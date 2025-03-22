@@ -23,7 +23,7 @@ export const prefetch = async (store: ReturnType<typeof createStore>, { episodeI
   const episode = await store.getState().features.episode.fetchEpisodeById({ episodeId });
   const modules = await store
     .getState()
-    .features.recommended.fetchRecommendedModulesByReferenceId({ referenceId: episodeId });
+    .features.recommended.fetchRecommendedModulesByReferenceId({ limit: 1, referenceId: episodeId });
   return { episode, modules };
 };
 
@@ -37,7 +37,7 @@ export const EpisodePage = () => {
   const episode = useEpisodeById({ episodeId });
   invariant(episode);
 
-  const modules = useRecommended({ referenceId: episodeId });
+  const modules = useRecommended({ limit: 1, referenceId: episodeId });
 
   const playerRef = usePlayerRef();
 

@@ -17,7 +17,7 @@ const $fetch = createFetch({
 
 interface RecommendedService {
   fetchRecommendedModulesByReferenceId: (params: {
-    limit?: number
+    limit?: number;
     referenceId: string;
   }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getRecommendedModulesResponse>>;
 }

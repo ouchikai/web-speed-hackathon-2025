@@ -1,73 +1,91 @@
-import path from 'node:path';
+import path from "node:path";
 
-import webpack from 'webpack';
+// import CompressionPlugin from 'compression-webpack-plugin';
+// import TerserPlugin from 'terser-webpack-plugin';
+import webpack from "webpack";
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 /** @type {import('webpack').Configuration} */
 const config = {
-  devtool: 'inline-source-map',
-  entry: './src/main.tsx',
-  mode: 'none',
+  // 本番モードで最適化
+  devtool: false, // ソースマップを無効化で軽量化
+  entry: "./src/main.tsx",
+  mode: "production",
+
   module: {
     rules: [
       {
         exclude: [/node_modules\/video\.js/, /node_modules\/@videojs/],
-        resolve: {
-          fullySpecified: false,
-        },
+        resolve: { fullySpecified: false },
         test: /\.(?:js|mjs|cjs|jsx|ts|mts|cts|tsx)$/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
             presets: [
               [
-                '@babel/preset-env',
+                "@babel/preset-env",
                 {
-                  corejs: '3.41',
+                  corejs: "3.41",
+                  // targets: '> 0.25%, not dead',
+                  // useBuiltIns: 'usage', // 必要なPolyfillだけを読み込む
                   forceAllTransforms: true,
-                  targets: 'defaults',
-                  useBuiltIns: 'entry',
+                  targets: "defaults",
+                  useBuiltIns: "entry",
                 },
               ],
-              ['@babel/preset-react', { runtime: 'automatic' }],
-              ['@babel/preset-typescript'],
+              ["@babel/preset-react", { runtime: "automatic" }],
+              ["@babel/preset-typescript"],
             ],
           },
         },
       },
       {
         test: /\.png$/,
-        type: 'asset/inline',
+        type: "asset/inline",
       },
       {
         resourceQuery: /raw/,
-        type: 'asset/source',
+        type: "asset/source",
       },
       {
         resourceQuery: /arraybuffer/,
-        type: 'javascript/auto',
-        use: {
-          loader: 'arraybuffer-loader',
-        },
+        type: "javascript/auto",
+        use: { loader: "arraybuffer-loader" },
       },
     ],
   },
-  output: {
-    chunkFilename: 'chunk-[contenthash].js',
-    chunkFormat: false,
-    filename: 'main.js',
-    path: path.resolve(import.meta.dirname, './dist'),
-    publicPath: 'auto',
+
+  optimization: {
+    minimize: true,
   },
+
+  output: {
+    // ハッシュ付きでキャッシュ防止
+    chunkFilename: "chunk-[contenthash].js",
+    chunkFormat: false,
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "./dist"),
+    publicPath: "auto",
+  },
+
   plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: '' }),
+    new webpack.EnvironmentPlugin({ API_BASE_URL: "/api", NODE_ENV: "" }),
+    //  new BundleAnalyzerPlugin()
   ],
   resolve: {
     alias: {
-      '@ffmpeg/core$': path.resolve(import.meta.dirname, 'node_modules', '@ffmpeg/core/dist/umd/ffmpeg-core.js'),
-      '@ffmpeg/core/wasm$': path.resolve(import.meta.dirname, 'node_modules', '@ffmpeg/core/dist/umd/ffmpeg-core.wasm'),
+      "@ffmpeg/core$": path.resolve(
+        import.meta.dirname,
+        "node_modules",
+        "@ffmpeg/core/dist/umd/ffmpeg-core.js"
+      ),
+      "@ffmpeg/core/wasm$": path.resolve(
+        import.meta.dirname,
+        "node_modules",
+        "@ffmpeg/core/dist/umd/ffmpeg-core.wasm"
+      ),
     },
-    extensions: ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts', '.tsx', '.jsx'],
+    extensions: [".js", ".cjs", ".mjs", ".ts", ".cts", ".mts", ".tsx", ".jsx"],
   },
 };
 

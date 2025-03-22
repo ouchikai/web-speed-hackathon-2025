@@ -1,6 +1,7 @@
 import { FORM_ERROR } from 'final-form';
 import { Form } from 'react-final-form';
 
+import { ErrorOutlineIcon } from '@wsh-2025/client/src/features/auth/components/SignInDialog';
 import { useAuthActions } from '@wsh-2025/client/src/features/auth/hooks/useAuthActions';
 import { Dialog } from '@wsh-2025/client/src/features/dialog/components/Dialog';
 

@@ -4,6 +4,7 @@ import { useId } from 'react';
 import { Field, Form } from 'react-final-form';
 import { z } from 'zod';
 
+import { ErrorOutlineIcon } from '@wsh-2025/client/src/features/auth/components/SignInDialog';
 import { useAuthActions } from '@wsh-2025/client/src/features/auth/hooks/useAuthActions';
 import { isValidEmail } from '@wsh-2025/client/src/features/auth/logics/isValidEmail';
 import { isValidPassword } from '@wsh-2025/client/src/features/auth/logics/isValidPassword';

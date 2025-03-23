@@ -74,7 +74,7 @@ export function registerSsr(app: FastifyInstance): void {
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
           <script src="/public/main.js"></script>
         </head>
-        <body></body>
+        <body>Loading...</body>
       </html>
     `);
   });

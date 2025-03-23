@@ -2,9 +2,9 @@ import path from 'node:path';
 
 // import CompressionPlugin from 'compression-webpack-plugin';
 // import TerserPlugin from 'terser-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import webpack from 'webpack';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-
 /** @type {import('webpack').Configuration} */
 const config = {
   // 本番モードで最適化
@@ -56,7 +56,30 @@ const config = {
 
   optimization: {
     minimize: true,
-    usedExports: true, // 未使用コードの削除
+    // 未使用コードの削除
+    minimizer: [
+      new TerserPlugin({
+        // 並列処理の実行を有効化
+        // 同時に実行するを数値を設定
+        parallel: 4,
+        // swcを有効化
+        // minify: TerserPlugin.swcMinify,
+        // Minify Optionsを設定
+        terserOptions: {
+          // 最適化
+          compress: {
+            comparisons: false,
+            ecma: 5,
+            inline: 2,
+          },
+          // 変数名を短く
+          mangle: {
+            safari10: true,
+          },
+        },
+      }),
+    ],
+    usedExports: true,
   },
 
   output: {

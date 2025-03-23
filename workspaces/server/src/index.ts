@@ -11,11 +11,12 @@ import { registerStreams } from '@wsh-2025/server/src/streams';
 async function main() {
   await initializeDatabase();
 
-  const app = fastify();
-
-  app.addHook('onSend', async (_req, reply) => {
-    reply.header('cache-control', 'public, max-age=604800'); // 604800秒 = 1週間
-  });
+  const app = fastify({ http2: true });
+  // 圧縮プラグインを全体に適用
+  // await app.register(import('@fastify/compress'), { global: true });
+  // app.addHook('onSend', async (_req, reply) => {
+  //   reply.header('cache-control', 'public, max-age=604800'); // 604800秒 = 1週間
+  // });
   app.register(cors, {
     origin: true,
   });

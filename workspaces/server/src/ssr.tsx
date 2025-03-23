@@ -72,7 +72,7 @@ export function registerSsr(app: FastifyInstance): void {
         <head>
           <meta charSet="UTF-8" />
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-          <script src="/public/main.js"></script>
+          <script async src="/public/main.js"></script>
         </head>
         <body></body>
       </html>

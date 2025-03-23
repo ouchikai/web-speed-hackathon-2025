@@ -63,8 +63,8 @@ export const Layout = ({ children }: Props) => {
               : 'bg-gradient-to-b from-[#171717] to-[#171717]',
           )}
         >
-          <Link className="block flex w-[188px] items-center justify-center px-[8px]" rel="preload" to="/">
-            <img alt="AREMA" className="object-contain" height={36} src="/public/arema.svg" width={98} />
+          <Link className="block flex w-[188px] items-center justify-center px-[8px]" to="/">
+            <img alt="AREMA" className="object-contain" height={36} loading="lazy" src="/public/arema.svg" width={98} />
           </Link>
         </header>
 

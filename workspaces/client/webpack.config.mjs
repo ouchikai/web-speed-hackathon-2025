@@ -26,10 +26,8 @@ const config = {
                 '@babel/preset-env',
                 {
                   corejs: '3.41',
-                  // targets: '> 0.25%, not dead',
-                  // useBuiltIns: 'usage', // 必要なPolyfillだけを読み込む
-                  forceAllTransforms: true,
-                  targets: 'defaults',
+                  targets: 'last 1 version', // 最新版のみ対象
+                  forceAllTransforms: false,
                   useBuiltIns: 'entry',
                 },
               ],

@@ -11,7 +11,8 @@ import { registerStreams } from '@wsh-2025/server/src/streams';
 async function main() {
   await initializeDatabase();
 
-  const app = fastify({ http2: true });
+  const app = fastify();
+  // const app = fastify({ http2: true });
   // 圧縮プラグインを全体に適用
   // await app.register(import('@fastify/compress'), { global: true });
   // app.addHook('onSend', async (_req, reply) => {

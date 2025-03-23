@@ -1,5 +1,7 @@
 import path from 'node:path';
-
+import CompressionPlugin from 'compression-webpack-plugin';
+// @ts-ignore
+import BrotliPlugin from 'brotli-webpack-plugin';
 // import CompressionPlugin from 'compression-webpack-plugin';
 // import TerserPlugin from 'terser-webpack-plugin';
 import webpack from 'webpack';
@@ -21,6 +23,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true, // キャッシュでビルド高速化
             presets: [
               [
                 '@babel/preset-env',
@@ -54,6 +57,7 @@ const config = {
   },
 
   optimization: {
+    usedExports: true, // 未使用コードを除去
     minimize: true,
   },
 
@@ -67,7 +71,19 @@ const config = {
   },
 
   plugins: [
-    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: '' }),
+    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: 'production' }),
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240, // 10KB以上を圧縮
+      minRatio: 0.8,
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
     // new BundleAnalyzerPlugin()
   ],
   resolve: {

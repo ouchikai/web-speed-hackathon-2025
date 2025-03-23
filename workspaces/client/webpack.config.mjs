@@ -55,6 +55,7 @@ const config = {
 
   optimization: {
     minimize: true,
+    usedExports: true, // 未使用コードの削除
   },
 
   output: {

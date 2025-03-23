@@ -1,10 +1,11 @@
 import { lens } from '@dhmk/zustand-lens';
 import { StandardSchemaV1 } from '@standard-schema/spec';
-import { DEFAULT_WIDTH } from '@wsh-2025/client/src/features/timetable/constants/grid_size';
 import * as schema from '@wsh-2025/schema/src/api/schema';
 import { produce } from 'immer';
 import debounce from 'lodash/debounce';
 import { ArrayValues } from 'type-fest';
+
+import { DEFAULT_WIDTH } from '@wsh-2025/client/src/features/timetable/constants/grid_size';
 
 type ChannelId = string;
 type Program = ArrayValues<StandardSchemaV1.InferOutput<typeof schema.getTimetableResponse>>;

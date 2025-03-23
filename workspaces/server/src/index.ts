@@ -1,5 +1,6 @@
 import '@wsh-2025/server/src/setups/luxon';
 
+import fastifyCompress from '@fastify/compress';
 import cors from '@fastify/cors';
 import fastify from 'fastify';
 
@@ -12,6 +13,12 @@ async function main() {
   await initializeDatabase();
 
   const app = fastify();
+  // 圧縮プラグインを登録
+  app.register(fastifyCompress, {
+    // グローバルで全てのレスポンスを圧縮
+    encodings: ['gzip', 'br'],
+    global: true,  // 使用する圧縮方式（gzip, brotli）
+  });
 
   app.addHook('onSend', async (_req, reply) => {
     reply.header('cache-control', 'public, max-age=604800'); // 604800秒 = 1週間

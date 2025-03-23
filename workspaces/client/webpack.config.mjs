@@ -26,8 +26,9 @@ const config = {
                 '@babel/preset-env',
                 {
                   corejs: '3.41',
-                  targets: 'last 1 version', // 最新版のみ対象
+                  // 最新版のみ対象
                   forceAllTransforms: false,
+                  targets: 'last 1 version',
                   useBuiltIns: 'entry',
                 },
               ],

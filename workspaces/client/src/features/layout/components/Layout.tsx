@@ -63,7 +63,7 @@ export const Layout = ({ children }: Props) => {
               : 'bg-gradient-to-b from-[#171717] to-[#171717]',
           )}
         >
-          <Link className="block flex w-[188px] items-center justify-center px-[8px]" to="/">
+          <Link className="block flex w-[188px] items-center justify-center px-[8px]" rel="preload" to="/">
             <img alt="AREMA" className="object-contain" height={36} src="/public/arema.svg" width={98} />
           </Link>
         </header>
@@ -106,6 +106,7 @@ export const Layout = ({ children }: Props) => {
 
             <Link
               className="block flex h-[56px] w-[188px] items-center justify-center pb-[8px] pl-[20px] pr-[8px] pt-[8px]"
+              rel="preload"
               to="/"
             >
               <div className="i-bi:house-fill m-[4px] size-[20px] shrink-0 grow-0">
@@ -122,6 +123,7 @@ export const Layout = ({ children }: Props) => {
 
             <Link
               className="block flex h-[56px] w-[188px] items-center justify-center pb-[8px] pl-[20px] pr-[8px] pt-[8px]"
+              rel="preload"
               to="/timetable"
             >
               <div className="m-[4px] size-[20px] shrink-0 grow-0">

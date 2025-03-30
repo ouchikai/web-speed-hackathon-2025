@@ -6,9 +6,9 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 /** @type {import('webpack').Configuration} */
 const config = {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: './src/main.tsx',
-  mode: 'none',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -24,10 +24,10 @@ const config = {
               [
                 '@babel/preset-env',
                 {
-                  corejs: '3.41',
-                  forceAllTransforms: true,
-                  targets: 'defaults',
-                  useBuiltIns: 'entry',
+                  // corejs: '3.41',
+                  // forceAllTransforms: true,
+                  // targets: 'defaults',
+                  // useBuiltIns: 'entry',
                 },
               ],
               ['@babel/preset-react', { runtime: 'automatic' }],
@@ -62,7 +62,6 @@ const config = {
   },
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: '' }),
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     new BundleAnalyzerPlugin(),

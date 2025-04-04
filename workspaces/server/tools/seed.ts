@@ -129,7 +129,7 @@ async function main() {
     const seriesList: (typeof schema.series.$inferSelect)[] = [];
     {
       const data: (typeof schema.series.$inferInsert)[] = Array.from({ length: 30 }, () => ({
-        description: faker.lorem.paragraph({ max: 200, min: 100 }).replace(/\s/g, '').replace(/\./g, '。'),
+        description: faker.lorem.paragraph({ max: 3, min: 3 }).replace(/\s/g, '').replace(/\./g, '。'),
         id: faker.string.uuid(),
         thumbnailUrl: `${faker.helpers.arrayElement(imagePaths)}?version=${faker.string.nanoid()}`,
         title: faker.helpers.arrayElement(seriesTitleList),
@@ -145,7 +145,7 @@ async function main() {
       const data: (typeof schema.episode.$inferInsert)[] = Array.from(
         { length: faker.number.int({ max: 20, min: 10 }) },
         (_, idx) => ({
-          description: faker.lorem.paragraph({ max: 200, min: 100 }).replace(/\s/g, '').replace(/\./g, '。'),
+          description: faker.lorem.paragraph({ max: 3, min: 3 }).replace(/\s/g, '').replace(/\./g, '。'),
           id: faker.string.uuid(),
           order: idx + 1,
           seriesId: series.id,
@@ -187,7 +187,7 @@ async function main() {
         const series = seriesList.find((s) => s.id === episode.seriesId);
         const program: typeof schema.program.$inferInsert = {
           channelId: channel.id,
-          description: faker.lorem.paragraph({ max: 200, min: 100 }).replace(/\s/g, '').replace(/\./g, '。'),
+          description: faker.lorem.paragraph({ max: 3, min: 3 }).replace(/\s/g, '').replace(/\./g, '。'),
           endAt: new Date(endAt).toISOString(),
           episodeId: episode.id,
           id: faker.string.uuid(),

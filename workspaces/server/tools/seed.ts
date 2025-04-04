@@ -8,8 +8,8 @@ import { DateTime } from 'luxon';
 import { fetchAnimeList } from '@wsh-2025/server/tools/fetch_anime_list';
 import { fetchLoremIpsumWordList } from '@wsh-2025/server/tools/fetch_lorem_ipsum_word_list';
 import * as bcrypt from 'bcrypt';
-import path from 'node:path';
 import { readdirSync } from 'node:fs';
+import path from 'node:path';
 
 function getFiles(parent: string): string[] {
   const dirents = readdirSync(parent, { withFileTypes: true });
@@ -162,7 +162,16 @@ async function main() {
     // Create programs
     console.log('Creating programs...');
     const programList: (typeof schema.program.$inferInsert)[] = [];
-    const episodeListGroupedByStreamId = Object.values(Object.groupBy(episodeList, (episode) => episode.streamId));
+    const episodeListGroupedByStreamId = Object.values(
+      episodeList.reduce((acc, episode) => {
+        const key = episode.streamId;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(episode);
+        return acc;
+      }, {} as Record<string, typeof episodeList>)
+    );
     for (const channel of channelList) {
       let remainingMinutes = 24 * 60;
       let startAt = DateTime.now().startOf('day').toMillis();

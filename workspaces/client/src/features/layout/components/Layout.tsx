@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigation } from 'react-router';
 
 import { SignInDialog } from '@wsh-2025/client/src/features/auth/components/SignInDialog';
 import { SignOutDialog } from '@wsh-2025/client/src/features/auth/components/SignOutDialog';
-import { SignUpDialog } from '@wsh-2025/client/src/features/auth/components/SignUpDialog';
+import { AremaLogo, SignUpDialog } from '@wsh-2025/client/src/features/auth/components/SignUpDialog';
 import { AuthDialogType } from '@wsh-2025/client/src/features/auth/constants/auth_dialog_type';
 import { useAuthActions } from '@wsh-2025/client/src/features/auth/hooks/useAuthActions';
 import { useAuthDialogType } from '@wsh-2025/client/src/features/auth/hooks/useAuthDialogType';
@@ -64,7 +64,7 @@ export const Layout = ({ children }: Props) => {
           )}
         >
           <Link className="block flex w-[188px] items-center justify-center px-[8px]" to="/">
-            <img alt="AREMA" className="object-contain" height={36} loading="lazy" src="/public/arema.svg" width={98} />
+            <AremaLogo />
           </Link>
         </header>
 

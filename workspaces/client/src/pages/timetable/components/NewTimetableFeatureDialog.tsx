@@ -1,4 +1,5 @@
 import FeatureExplainImageUrl from '@wsh-2025/client/assets/timetable/feature-explain.png';
+import { AremaLogo } from '@wsh-2025/client/src/features/auth/components/SignUpDialog';
 import { Dialog } from '@wsh-2025/client/src/features/dialog/components/Dialog';
 import { useCloseNewFeatureDialog } from '@wsh-2025/client/src/pages/timetable/hooks/useCloseNewFeatureDialog';
 
@@ -13,7 +14,7 @@ export const NewTimetableFeatureDialog = ({ isOpen }: Props) => {
     <Dialog isOpen={isOpen} onClose={onClose}>
       <div className="size-full">
         <div className="mb-[16px] flex w-full flex-row justify-center">
-          <img className="object-contain" height={36} loading="lazy" src="/public/arema.svg" width={98} />
+          <AremaLogo />
         </div>
 
         <h2 className="mb-[24px] text-center text-[24px] font-bold">拡大・縮小機能を新しく追加</h2>
